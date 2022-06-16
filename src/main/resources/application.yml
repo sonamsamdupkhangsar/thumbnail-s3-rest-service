@@ -2,10 +2,10 @@ logging:
   level:
     root: error
     me:
-      sonam: debug
+      sonam: info
 info:
   app:
-    name: Springboot me.sonam.Application
+    name: Springboot me.sonam.account.Application
     description: This is a Springboot application
     version: 1.0.0
 
@@ -16,3 +16,16 @@ management:
 
 server:
   port: 8080
+
+aws:
+  s3:
+    region: https://sfo2.digitaloceanspaces.com
+    accessKeyId: ${accessKeyId}
+    secretAccessKey: ${secretAccessKey}
+    bucket: sonam
+    endpoint: ${endpoint}
+    subdomain: ${subdomain}
+    videoPath: videoapp/1/
+    imageAclHeader: x-amz-acl
+    imageAclValue: public-read
+    presignDurationInMinutes: 60
