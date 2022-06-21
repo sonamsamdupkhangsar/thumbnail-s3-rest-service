@@ -1,7 +1,6 @@
 package me.sonam.thumbnail;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,13 +19,15 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.io.IOException;
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * this test will upload file to s3 bucket using the router
  */
-@EnableAutoConfiguration
+/*@EnableAutoConfiguration
 @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)*/
 public class CreateVideoThumbnailRestServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(CreateVideoThumbnailRestServiceTest.class);
 
@@ -36,20 +37,18 @@ public class CreateVideoThumbnailRestServiceTest {
     @Value("classpath:mydogsleeping.mp4")
     private Resource video;
 
-    @Value("${apiKey}")
-    private String apiKey;
-
     @Value("${s3-rest-service-endpoint}")
     private String s3RestEndpoint;
 
-    @Test
+  @Test
     public void hello() {
-
+        assertThat(true).isTrue();
+        LOG.info("hello");
     }
 
     public void uploadVideoFile() throws IOException, InterruptedException {
         LOG.info("s3RestEndpoint: {}", s3RestEndpoint);
-        Assert.assertNotNull(video);
+        assertThat(video).isNotNull();
 
         client = client.mutate().responseTimeout(Duration.ofSeconds(80)).build();
         /*WebClient.ResponseSpec responseSpec = */
@@ -92,9 +91,9 @@ public class CreateVideoThumbnailRestServiceTest {
 
     public void uploadVideoAndCreateGif() throws IOException, InterruptedException {
         LOG.info("video: {}", video);
-        Assert.assertNotNull(video);
+        assertThat(video).isNotNull();
         LOG.info("video contentLength: {}, video: {}", video.contentLength(), video);
-        Assert.assertTrue(video.getFile().exists());
+        assertThat(video.getFile().exists()).isTrue();
 
         client = client.mutate().responseTimeout(Duration.ofSeconds(80)).build();
 

@@ -20,15 +20,14 @@ server:
 aws:
   s3:
     region: https://sfo2.digitaloceanspaces.com
-    accessKeyId: ${accessKeyId}
-    secretAccessKey: ${secretAccessKey}
+    accessKeyId: somekey-id
+    secretAccessKey: some-accesskey
     bucket: sonam
-    endpoint: ${endpoint}
-    subdomain: ${subdomain}
+    endpoint: https://www.sonam.cloud
+    subdomain: https://www.sonam.cloud
     videoPath: videoapp/1/
     imageAclHeader: x-amz-acl
     imageAclValue: public-read
     presignDurationInMinutes: 60
 
-apiKey: ${apiKey}
 s3-rest-service-endpoint: https://s3-rest-service.sonam.cloud/upload

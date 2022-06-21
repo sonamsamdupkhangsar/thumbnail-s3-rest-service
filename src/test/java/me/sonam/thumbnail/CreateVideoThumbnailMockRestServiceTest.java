@@ -2,16 +2,16 @@ package me.sonam.thumbnail;
 
 import me.sonam.thumbnail.handler.S3Handler;
 import me.sonam.thumbnail.handler.S3Service;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.server.*;
 import org.springframework.web.reactive.function.server.support.ServerRequestWrapper;
@@ -22,10 +22,9 @@ import java.io.IOException;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
 public class CreateVideoThumbnailMockRestServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(CreateVideoThumbnailMockRestServiceTest.class);
-
 
     private final ServerRequest mockServerRequest = mock(ServerRequest.class);
     private final ServerRequestWrapper mockServerRequestWrapper = new ServerRequestWrapper(
@@ -39,10 +38,11 @@ public class CreateVideoThumbnailMockRestServiceTest {
     @Mock
     private S3Service s3Service;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         LOG.info("setup mock");
         MockitoAnnotations.openMocks(this);
+
         RouterFunction<ServerResponse> routerFunction = RouterFunctions
                 .route(RequestPredicates.POST("/videothumbnail"),
                         s3Handler::createVideoThumbnail);
